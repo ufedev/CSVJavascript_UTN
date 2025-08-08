@@ -9,6 +9,11 @@
     - Precio
 
 - Funciones que debe tener
+- Crear carpeta separada llamada csvs
+- Crear Archivo csv
+- Listar CSV
+
+- Funciones en los csv
 
   - Lectura
   - Escritura
