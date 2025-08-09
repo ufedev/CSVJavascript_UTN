@@ -1,19 +1,45 @@
-import fs from "fs/promises"
+import { input } from "./utils.mjs"
+import { CSV } from "./CSV.mjs"
 
-const archivo = "datos.csv"
-const fecha = new Date()
 
-try {
-    await fs.writeFile(`./csv/${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}.csv`, "ID,Producto,Stock,Precio\n")
+while (true) {
+    console.clear()
+    console.log(`
+        CSVJavascript
+        1. Crear CSV
+        2. Abrir CSV
+        3. Eliminar CSV
+        4. Salir
+        `)
 
-    console.log("ha sido creado el archivo.csv")
-} catch {
-    // await fs.mkdir("csv")
+    const opcion = await input("Seleccione la seleccion que desea seleccionar: ")
+
+    switch (opcion) {
+        case "1":
+            console.clear()
+            console.log(`
+                Ha ingresado en Crear CSV
+                debe ingresar el nombre: `)
+            const nombre = await input("..")
+            await CSV.crear_csv(nombre)
+            await input("Enter para continuar...")
+            break
+        case "2":
+            console.clear()
+            console.log("Lista de archivos disponibles:")
+            await CSV.listar_csv()
+
+            const seleccion = await input("Ingrese el numero de archivo que desea seleccionar: ")
+            const archivo_abierto = await CSV.abrir(seleccion)
+            archivo_abierto.leer()
+            await input("")
+            break
+
+
+        case "4":
+            process.exit(1)
+        default:
+            console.log("Opcion no encontrada")
+
+    }
 }
-// fs.readdir("./csv") `Lee` un directorio/carpeta
-// fs.readFile(nombrefile)
-// fs.writeFile(nombrefile, datos)
-// fs.appendFile(nombrefile, datos)
-// fs.unlink(nombrefile)
-// fs.
-
